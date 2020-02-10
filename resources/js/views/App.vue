@@ -8,27 +8,27 @@
 
                 <div class="left-side-logo d-block d-lg-none">
                     <div class="text-center">
-                        
+
                         <router-link to="/admin" class="logo"><img src="/images/logo_dark.png" height="20" alt="logo"></router-link>
                     </div>
                 </div>
 
                 <div class="sidebar-inner slimscrollleft">
-                    
+
                     <div id="sidebar-menu">
                         <ul>
 
                                 <li class="menu-title" v-if="$auth.check(['Kasir','Admin'])">Kasir</li>
 
-                                
+
                                 <li v-if="$auth.check(['Kasir','Admin'])">
                                     <router-link to="/transaksi" class="waves-effect"><i class="dripicons-rocket"></i> <span> Transaksi </span> </router-link>
                                 </li>
-                                
+
                                 <li v-if="$auth.check(['Kasir','Admin'])">
                                     <router-link to="/transaksi/riwayat" class="waves-effect"><i class="dripicons-to-do"></i> <span> Riwayat Transaksi </span> </router-link>
                                 </li>
-                        
+
                             <li class="menu-title" v-if="$auth.check('Admin')">Admin</li>
 
                             <li v-if="$auth.check('Admin')">
@@ -37,19 +37,19 @@
                                     <span> Dashboard </span>
                                 </router-link>
                             </li>
-                            
+
                             <li v-if="$auth.check('Admin')">
                                 <router-link to="/admin/transaksi" class="waves-effect"><i class="dripicons-archive"></i> <span> Semua Transaksi </span> </router-link>
                             </li>
-                            
+
                             <li v-if="$auth.check('Admin')">
                                 <router-link to="/admin/category" class="waves-effect"><i class="dripicons-archive"></i> <span> Kategori </span> </router-link>
                             </li>
-                            
+
                             <li v-if="$auth.check('Admin')">
                                 <router-link to="/admin/users" class="waves-effect"><i class="dripicons-user"></i> <span> Pengguna </span> </router-link>
                             </li>
-                            
+
                             <li v-if="$auth.check('Admin')">
                                 <router-link to="/admin/customer" class="waves-effect"><i class="dripicons-user"></i> <span> Customer </span> </router-link>
                             </li>
@@ -93,7 +93,7 @@
                 </div> <!-- content -->
 
                 <footer class="footer" v-if="$route.meta.pageType != 'auth'">
-                    © 2019 <a href="https://zuramai.net">Zuramai Network</a> <span class="d-none d-md-inline-block"> - Crafted with <i class="mdi mdi-heart text-danger"></i> by Ahmad Saugi.</span>
+                    © 2020 <a href="/">LOVA</a> <span class="d-none d-md-inline-block">  <i class="mdi mdi-heart text-danger"></i> </span>
                 </footer>
 
             </div>
