@@ -11,7 +11,12 @@
         <meta name='csrf-token' content="{{ csrf_token() }}">
 
         <link rel="shortcut icon" href="{{asset('/images/favicon.ico')}}">
-
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-status-bar-style" content="default">
+        <meta name="apple-mobile-web-app-title" content="POS LOVA">
+        <meta name="msapplication-TileImage" content="link to the image in static folder">
+        <meta name="msapplication-TileColor" content="#000">
+        <link rel="manifest" href="{{ url('/manifest.json') }}"/>
         <link href="{{asset('/css/app.css')}}" rel="stylesheet" type="text/css">
         <link href="{{asset('/css/icons.css')}}" rel="stylesheet" type="text/css">
         <link href="{{asset('/css/style.css')}}" rel="stylesheet" type="text/css">
