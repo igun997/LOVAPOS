@@ -10,18 +10,7 @@
                                             </div>
                                             <div class="col-md-4">
                                                 <div class="float-right d-none d-md-block">
-                                                    <div class="dropdown">
-                                                        <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                            <i class="ti-settings mr-1"></i> Settings
-                                                        </button>
-                                                        <div class="dropdown-menu dropdown-menu-right dropdown-menu-animated">
-                                                            <a class="dropdown-item" href="#">Action</a>
-                                                            <a class="dropdown-item" href="#">Another action</a>
-                                                            <a class="dropdown-item" href="#">Something else here</a>
-                                                            <div class="dropdown-divider"></div>
-                                                            <a class="dropdown-item" href="#">Separated link</a>
-                                                        </div>
-                                                    </div>
+
                                                 </div>
                                             </div>
                                             <!-- end col -->
@@ -30,14 +19,14 @@
                                     </div>
                                     <!-- end page-title-box -->
                                 </div>
-                            </div> 
+                            </div>
                             <!-- end page title -->
 
                             <div class="row">
-                                <div class="col-12">
+                                <div class="col-5 offset-3" id="printed">
                                     <div class="card m-b-30">
                                         <div class="card-body">
-            
+
                                             <div class="row">
                                                 <div class="col-12">
                                                     <div class="invoice-title">
@@ -81,7 +70,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-            
+
                                             <div class="row">
                                                 <div class="col-12">
                                                     <div class="panel panel-default">
@@ -101,7 +90,7 @@
                                                                     </tr>
                                                                     </thead>
                                                                     <tbody>
-                                                                    
+
                                                                     <tr v-for="order_detail in data_order.details" v-bind:key="order_detail.id">
                                                                         <td>{{order_detail.product.name}}</td>
                                                                         <td class="text-center">Rp {{ numberFormat(order_detail.price - order_detail.ppn) }}</td>
@@ -132,22 +121,23 @@
                                                                     </tbody>
                                                                 </table>
                                                             </div>
-            
-                                                            <div class="d-print-none mo-mt-2">
-                                                                <div class="float-right">
-                                                                    <a href="javascript:window.print()" class="btn btn-success waves-effect waves-light"><i class="fa fa-print"></i> Print</a>
-                                                                </div>
-                                                            </div>
+
+
                                                         </div>
                                                     </div>
-            
+
                                                 </div>
                                             </div> <!-- end row -->
-            
+
                                         </div>
                                     </div>
                                 </div> <!-- end col -->
-                            </div> <!-- end row -->            
+                                <div class="d-print-none mo-mt-2">
+                                    <div class="float-right">
+                                        <button class='btn btn-success' v-on:click="print">Print</button>
+                                    </div>
+                                </div>
+                            </div> <!-- end row -->
 
                         </div><!-- container fluid -->
 </template>
@@ -155,7 +145,7 @@
 export default {
     mounted() {
         let invoice_id = this.$route.params.invoice_id;
-        
+
         this.displayData(invoice_id);
     },
 
@@ -180,13 +170,35 @@ export default {
     },
 
     methods: {
-        displayData(invoice_id) {
+        displayData: function(invoice_id) {
             axios.get(`/api/v1/transaction/invoice/${invoice_id}`)
                 .then(res => {
                     this.data_order = res.data;
                 });
+        },
+        print:function(){
+          const prtHtml = document.getElementById('printed').innerHTML;
+          let stylesHtml = '';
+          for (const node of [...document.querySelectorAll('link[rel="stylesheet"], style')]) {
+            stylesHtml += node.outerHTML;
+          }
+          var WinPrint = window.open('', '', 'left=0,top=0,width=800,height=900,toolbar=0,scrollbars=0,status=0');
+          WinPrint.document.write(`<!DOCTYPE html>
+          <html>
+            <head>
+              ${stylesHtml}
+            </head>
+            <body>
+              ${prtHtml}
+            </body>
+          </html>`);
+          WinPrint.document.close();
+          WinPrint.focus();
+          setTimeout(function(){
+              WinPrint.print();
+              WinPrint.close();
+          }, 2000);
         }
     }
 }
 </script>
-
