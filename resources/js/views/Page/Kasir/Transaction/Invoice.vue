@@ -183,7 +183,7 @@ export default {
             stylesHtml += node.outerHTML;
           }
           var WinPrint = window.open('', '', 'left=0,top=0,width=800,height=900,toolbar=0,scrollbars=0,status=0');
-          WinPrint.document.write(`<!DOCTYPE html>
+          WinPrint.document.write('<!DOCTYPE html>
           <html>
             <head>
               ${stylesHtml}
@@ -191,7 +191,7 @@ export default {
             <body>
               ${prtHtml}
             </body>
-          </html>`);
+          </html>');
           WinPrint.document.close();
           WinPrint.focus();
           setTimeout(function(){
